@@ -41,4 +41,5 @@ axios.get('https://jsonplaceholder.typicode.com/posts')
     })
     .catch(error => {
         console.error('Error:', error); // Xử lý lỗi nếu có
+>>>>>>> 86e8095 (Lần đầu commit mã nguồn)
     });

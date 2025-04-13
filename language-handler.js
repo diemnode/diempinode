@@ -1,3 +1,4 @@
+
 // Ngôn ngữ mặc định
 let currentLanguage = 'vi';
 
@@ -60,3 +61,4 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 });
+>>>>>>> 86e8095 (Lần đầu commit mã nguồn)

@@ -167,4 +167,5 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Cập nhật dữ liệu mỗi 30 giây
   setInterval(updateBlockchainData, 30000);
+>>>>>>> 86e8095 (Lần đầu commit mã nguồn)
 });
