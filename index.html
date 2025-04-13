@@ -1,0 +1,2231 @@
+
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diễm Pi Node - Dịch vụ & Sản phẩm Node Pi Network</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+    <style>
+        :root {
+            --pi-purple: #ab54be; /* Màu tím chính */
+            --pi-purple-dark: #a033b4; /* Màu tím đậm hơn */
+            --pi-purple-light: #c091d0; /* Màu tím nhạt */
+            --pi-blue: #3366cc; /* Màu xanh dương */
+            --pi-gradient: linear-gradient(135deg, #ab54be, #4776E6);
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            background-color: #f9fafb;
+        }
+        
+        .pi-gradient {
+            background: linear-gradient(135deg, #ab54be, #c091d0);
+        }
+
+        .pi-btn {
+            background-color: var(--pi-purple);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .pi-btn:hover {
+            background-color: var(--pi-purple-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(106, 61, 232, 0.3);
+        }
+
+        .pi-btn-secondary {
+            background-color: white;
+            color: var(--pi-purple);
+            border: 1px solid var(--pi-purple);
+        }
+        
+        .pi-btn-secondary:hover {
+            background-color: #f8f5ff;
+        }
+
+        .price-tag {
+            background-color: var(--pi-purple);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .card {
+            transition: all 0.3s ease;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(106, 61, 232, 0.2);
+        }
+
+        .blockchain-box {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        .blockchain-header {
+            background-color: var(--pi-purple);
+            color: white;
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+        }
+
+        .blockchain-data {
+            background-color: white;
+            padding: 1rem;
+        }
+
+        .nav-link {
+            position: relative;
+            padding: 0.5rem 1rem;
+            color: #4b5563;
+            font-weight: 500;
+        }
+        
+        .nav-link:hover {
+            color: var(--pi-purple);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--pi-purple);
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .active-nav {
+            color: var(--pi-purple);
+        }
+        
+        .active-nav::after {
+            width: 100%;
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: #1f2937;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -0.5rem;
+            width: 3rem;
+            height: 0.25rem;
+            background-color: var(--pi-purple);
+            border-radius: 0.125rem;
+        }
+
+        .feature-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 9999px;
+            background-color: rgba(106, 61, 232, 0.1);
+            color: var(--pi-purple);
+            margin-bottom: 1rem;
+        }
+
+        .transaction-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .transaction-row:last-child {
+            border-bottom: none;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .badge-success {
+            background-color: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+        }
+        
+        .badge-warning {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: #f59e0b;
+        }
+
+        .service-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.75rem;
+            transition: all 0.3s ease;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%);
+            z-index: 1;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-card-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            color: white;
+            z-index: 2;
+        }
+
+        .testimonial-card {
+            position: relative;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            font-size: 4rem;
+            line-height: 1;
+            color: rgba(106, 61, 232, 0.1);
+            font-family: serif;
+        }
+
+        .step-card {
+            position: relative;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+            padding-left: 4rem;
+        }
+        
+        .step-number {
+            position: absolute;
+            left: 1rem;
+            top: 1.5rem;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9999px;
+            background-color: var(--pi-purple);
+            color: white;
+            font-weight: bold;
+        }
+
+        .news-card {
+            border-radius: 0.75rem;
+            overflow: hidden;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(106, 61, 232, 0.2);
+        }
+
+        .news-date {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            background-color: rgba(106, 61, 232, 0.1);
+            color: var(--pi-purple);
+        }
+
+        .contact-info-card {
+            display: flex;
+            align-items: center;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 9999px;
+            background-color: rgba(106, 61, 232, 0.1);
+            color: var(--pi-purple);
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .footer-link {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #6b7280;
+            transition: color 0.3s;
+        }
+        
+        .footer-link:hover {
+            color: var(--pi-purple);
+        }
+
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 9999px;
+            background-color: #f3f4f6;
+            color: #6b7280;
+            margin-right: 0.5rem;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--pi-purple);
+            color: white;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            transition: border-color 0.3s;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: var(--pi-purple);
+            box-shadow: 0 0 0 3px rgba(106, 61, 232, 0.1);
+        }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        
+        .specs-table td {
+            padding: 0.5rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .specs-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .mobile-menu {
+                display: none;
+            }
+            
+            .mobile-menu.active {
+                display: block;
+            }
+        }
+
+        /* For iframe embedding */
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .iframe-container iframe {
+            width: 150%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* khung giá Pi */
+        .pi-price-container {
+            background-color: white; /* Thay nền màu trắng */
+            padding: 20px; /* Khoảng cách bên trong khung */
+            border-radius: 10px; /* Bo góc khung */
+            border: 2px solid #6a3de8; /* Viền màu tím để tạo điểm nhấn */
+            text-align: center; /* Căn giữa nội dung */
+            max-width: 300px; /* Chiều rộng tối đa của khung */
+            margin-left: auto; /* Đẩy khung sang phải */
+            margin-top: 10px; /* Tạo khoảng cách trên */
+        }
+        
+        .pi-price-text {
+            font-size: 2rem; /* Chữ lớn hơn */
+            font-weight: bold; /* Làm chữ đậm */
+            color: #6a3de8; /* Màu tím nổi bật */
+        }
+        
+        .price-widget {
+            background-color: white; /* Nền trắng */
+            color: black; /* Màu chữ đen */
+            text-align: left; /* Căn chỉnh trái hoặc theo ý bạn */
+            padding: 1rem;
+            border-radius: 5px;
+        }
+        
+        .price-widget {
+            background-color: rgba(255, 255, 255, 0.9); /* Màu nền trắng với 50% độ trong suốt */
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        /* làm nổi bật từng khối */
+        .block, .card, .service-card {
+            border: 5px #C0C0C0; /* Đặt đường viền dày và màu tím */
+            border-radius: 5px; /* Bo tròn các góc */
+            padding: 20px; /* Tạo khoảng cách giữa viền và nội dung */
+            transition: all 0.3s ease; /* Hiệu ứng mượt mà khi di chuột */
+        }
+
+        .block:hover, .card:hover, .service-card:hover {
+            border-color: #540d6e; /* Đổi màu viền khi di chuột */
+            box-shadow: 0px 8px 216px rgba(0, 0, 0, 0.2); /* Thêm đổ bóng khi di chuột */	
+        }
+        
+        /* video hướng dẫn */
+        .video-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            padding-top: 56.25%; /* Tỷ lệ 16:9 */
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Thêm các style cho chức năng "Xem thêm sản phẩm" */
+        .additional-products {
+            display: none;
+        }
+        
+        .view-more-btn {
+            display: block;
+            margin: 2rem auto;
+            padding: 0.75rem 2rem;
+            background: linear-gradient(135deg, #ab54be, #4776E6);
+            color: white;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(106, 61, 232, 0.3);
+            max-width: 250px;
+            cursor: pointer;
+        }
+        
+        .view-more-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(106, 61, 232, 0.4);
+        }
+        
+        /* Tại Sao Chọn Dịch Vụ Của Chúng Tôi - Cải tiến */
+        .why-choose-us {
+            background: linear-gradient(135deg, #ab54be, #4776E6);
+            border-radius: 1rem;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(106, 61, 232, 0.2);
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+            color: white;
+        }
+        
+        .why-choose-us h3 {
+            color: white;
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 700;
+        }
+        
+        .feature-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            height: 100%;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+        
+        .feature-icon-enhanced {
+            width: 4rem;
+            height: 4rem;
+            margin: 0 auto 1rem auto;
+            background-color: white;
+            color: #ab54be;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Nút Nhận Hỗ Trợ Kỹ Thuật - Cải tiến */
+        .support-btn-container {
+            text-align: center;
+            margin: 3rem 0;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(171, 84, 190, 0.1), rgba(71, 118, 230, 0.1));
+            border-radius: 1rem;
+            box-shadow: 0 5px 20px rgba(106, 61, 232, 0.1);
+        }
+        
+        .support-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, #ab54be, #4776E6);
+            color: white;
+            border-radius: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            box-shadow: 0 8px 20px rgba(106, 61, 232, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+        }
+        
+        .support-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(106, 61, 232, 0.4);
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(171, 84, 190, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(171, 84, 190, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(171, 84, 190, 0);
+            }
+        }
+        
+        .support-btn {
+            animation: pulse 2s infinite;
+        }
+        
+        .support-btn i {
+            margin-right: 0.75rem;
+            font-size: 1.25rem;
+        }
+        
+        .support-message {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        /* Thiết kế sản phẩm */
+        .product-tag {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 10;
+        }
+        
+        .product-tag-basic {
+            background-color: #4776E6;
+            color: white;
+        }
+        
+        .product-tag-standard {
+            background-color: #FF8C00;
+            color: white;
+        }
+        
+        .product-tag-premium {
+            background-color: #ab54be;
+            color: white;
+        }
+        
+        .product-tag-advanced {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        .product-tag-enterprise {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .product-tag-entry {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: linear-gradient(135deg, #FF8C00, #FFA500);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            font-weight: bold;
+            z-index: 10;
+            box-shadow: 0 3px 8px rgba(255, 140, 0, 0.3);
+        }
+		/* Chữ trong phần hỗ trợ */
+		    .support-message {
+        font-size: 18px;
+        line-height: 1.6;
+        color: #333;
+    }
+	/* CSS cho phần Pi Blockchain Data */
+#blockchain-data {
+  padding: 2rem 0;
+  background-color: #f9f9f9;
+}
+
+.blockchain-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-item {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+
+.stat-item:hover {
+  transform: translateY(-5px);
+}
+
+.stat-item h4 {
+  color: #333;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.stat-item p {
+  color: #2e58ff;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.blockchain-live-data {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.transactions-section, .blocks-section {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.transaction-item, .block-item {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.transaction-item:last-child, .block-item:last-child {
+  border-bottom: none;
+}
+
+.tx-account {
+  font-weight: bold;
+  color: #2e58ff;
+}
+
+.tx-amount {
+  color: #333;
+}
+
+.tx-status {
+  color: #4CAF50;
+  font-weight: bold;
+}
+
+.tx-time {
+  color: #999;
+  font-size: 0.9rem;
+}
+
+.block-header {
+  font-weight: bold;
+  color: #2e58ff;
+}
+
+.block-tx-count {
+  color: #333;
+}
+
+/* Thêm animation cho dữ liệu thay đổi */
+@keyframes highlight {
+  0% { background-color: rgba(46, 88, 255, 0.2); }
+  100% { background-color: transparent; }
+}
+
+.highlight {
+  animation: highlight 1.5s ease-out;
+}
+ /* CSS cho phần blockchain data */
+    #blockchain-data {
+        background-color: #f9f9f9;
+        padding: 30px;
+        border-radius: 8px;
+        margin: 30px 0;
+    }
+    
+    .network-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+    
+    .stat-item {
+        background-color: white;
+        padding: 15px;
+        border-radius: 6px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+    
+    .stat-item h4 {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 10px;
+    }
+    
+    .stat-item p {
+        font-size: 18px;
+        font-weight: bold;
+        color: #4a6cfa;
+        margin: 0;
+    }
+    
+    .blockchain-data-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+    
+    @media (max-width: 768px) {
+        .blockchain-data-container {
+            grid-template-columns: 1fr;
+        }
+    }
+    
+    .data-list {
+        background: white;
+        border-radius: 6px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        padding: 15px;
+    }
+    
+    .transaction-item, .block-item {
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .transaction-item:last-child, .block-item:last-child {
+        border-bottom: none;
+    }
+    
+    .transaction-item h4, .block-item h4 {
+        margin: 0 0 5px 0;
+        font-size: 16px;
+    }
+    
+    .transaction-item p, .block-item p {
+        margin: 2px 0;
+        font-size: 14px;
+    }
+    
+    .status {
+        font-weight: bold;
+    }
+    
+    .status.success {
+        color: #00a65a;
+    }
+    
+    .status.failed {
+        color: #dd4b39;
+    }
+    
+    .time {
+        color: #999;
+        font-size: 12px !important;
+    }
+
+    </style>
+</head>
+<body>
+ <!-- Banner -->
+    <div class="bg-yellow-400 text-center py-4 text-white font-bold">
+        <p>🎉 Mã mời khai thác Pi cho người mới: huynhthibichdiem! 🎉</p>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <div class="text-2xl font-bold text-gray-800">
+                        <span class="text-purple-700">Diễm Pi Node</span> 
+                    </div>
+                </div>
+                <nav class="hidden md:flex space-x-4">
+                    <a href="#blockchain" class="nav-link">Blockchain</a>
+                    <a href="#products" class="nav-link">Máy Node</a>
+                    <a href="#services" class="nav-link">Dịch Vụ</a>
+                    <a href="#guides" class="nav-link">Hướng Dẫn</a>
+                    <a href="#news" class="nav-link">Tin Tức</a>
+                    <a href="#contact" class="nav-link">Liên Hệ</a>
+                </nav>
+                <button class="md:hidden focus:outline-none" id="menu-toggle">
+                    <i class="fas fa-bars text-gray-600 text-xl"></i>
+                </button>
+            </div>
+            <div class="mobile-menu mt-4 hidden md:hidden" id="mobile-menu">
+                <a href="#blockchain" class="block py-2 px-4 text-gray-600 hover:bg-gray-100 rounded">Blockchain</a>
+                <a href="#products" class="block py-2 px-4 text-gray-600 hover:bg-gray-100 rounded">Máy Node</a>
+                <a href="#services" class="block py-2 px-4 text-gray-600 hover:bg-gray-100 rounded">Dịch Vụ</a>
+                <a href="#guides" class="block py-2 px-4 text-gray-600 hover:bg-gray-100 rounded">Hướng Dẫn</a>
+                <a href="#news" class="block py-2 px-4 text-gray-600 hover:bg-gray-100 rounded">Tin Tức</a>
+                <a href="#contact" class="block py-2 px-4 text-gray-600 hover:bg-gray-100 rounded">Liên Hệ</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pi-gradient text-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap items-center">
+                <div class="w-full md:w-1/2 mb-8 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Dịch Vụ Pi Node Trọn Gói</h1>
+                    <p class="text-lg mb-8">Cung cấp giải pháp Pi Node toàn diện: Từ máy tính chuyên dụng, Dịch vụ cài đặt đến Chăm sóc node từ xa.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#products" class="pi-btn">Xem Sản Phẩm</a>
+                        <a href="#contact" class="pi-btn pi-btn-secondary">Liên Hệ Ngay</a>
+                    </div>
+                </div>
+         
+  <!-- Cột bên phải (Biểu đồ giá) -->
+      <div class="md:w-1/2 flex justify-center">
+    <div class="bg-white p-6 rounded-lg w-full max-w-md price-widget">
+        <!-- Biểu đồ giá từ CoinMarketCap -->
+        <script type="text/javascript" src="https://files.coinmarketcap.com/static/widget/currency.js"></script>
+        <div class="coinmarketcap-currency-widget" data-currencyid="35697" data-base="USD" data-secondary="" data-ticker="true" data-rank="true" data-marketcap="true" data-volume="true" data-statsticker="true" data-stats="USD"></div>
+    </div>
+</div>
+            </div>
+        </div>
+    </div>
+            </div>
+        </div>
+
+    </section>
+<!-- Thêm file JavaScript để lấy dữ liệu blockchain -->
+<script src="pi-blockchain-data.js"></script>
+    <!-- Pi Network Stats Section -->
+    <section class="py-16 bg-white" id="blockchain">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">Pi Blockchain Data</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="blockchain-box">
+                    <div class="blockchain-header">Thông Tin Mạng Lưới</div>
+                    <div class="blockchain-data">
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-700">Migrated Mining Rewards</h4>
+                            <p class="text-2xl font-bold text-purple-700">6,860,313,629.745 π</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-700">Currently Locked Mining Rewards</h4>
+                            <p class="text-xl font-bold text-purple-700">5,120,820,450.893 π</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-700">Currently Unlocked Mining Rewards</h4>
+                            <p class="text-xl font-bold text-purple-700">1,739,493,178.852 π</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-700">Circulating Supply</h4>
+                            <p class="text-xl font-bold text-purple-700">6,860,313,629.745 π</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-700">Effective Total Supply</h4>
+                            <p class="text-xl font-bold text-purple-700">10,554,328,661.146 π</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="blockchain-box">
+                    <div class="blockchain-header">Các Giao Dịch Mới Nhất</div>
+                    <div class="blockchain-data">
+                        <div class="transaction-row">
+                            <div>
+                                <span class="text-gray-500 text-sm">GBFX...6WGJ</span>
+                                <div class="text-sm">Chuyển 62 π</div>
+                            </div>
+                            <div class="text-right">
+                                <span class="badge badge-success">Thành công</span>
+                                <div class="text-xs text-gray-500">6 giây trước</div>
+                            </div>
+                        </div>
+                        <div class="transaction-row">
+                            <div>
+                                <span class="text-gray-500 text-sm">GDEE...4UJF</span>
+                                <div class="text-sm">Chuyển 39.37 π</div>
+                            </div>
+                            <div class="text-right">
+                                <span class="badge badge-success">Thành công</span>
+                                <div class="text-xs text-gray-500">6 giây trước</div>
+                            </div>
+                        </div>
+                        <div class="transaction-row">
+                            <div>
+                                <span class="text-gray-500 text-sm">GC2U...ILMW</span>
+                                <div class="text-sm">Chuyển 20 π</div>
+                            </div>
+                            <div class="text-right">
+                                <span class="badge badge-success">Thành công</span>
+                                <div class="text-xs text-gray-500">6 giây trước</div>
+                            </div>
+                        </div>
+                        <div class="transaction-row">
+                            <div>
+                                <span class="text-gray-500 text-sm">GDSR...CORQ</span>
+                                <div class="text-sm">Claim balance</div>
+                            </div>
+                            <div class="text-right">
+                                <span class="badge badge-success">Thành công</span>
+                                <div class="text-xs text-gray-500">6 giây trước</div>
+                            </div>
+                        </div>
+                        <div class="transaction-row">
+                            <div>
+                                <span class="text-gray-500 text-sm">GCM6...MLZH</span>
+                                <div class="text-sm">Chuyển 0.68 π</div>
+                            </div>
+                            <div class="text-right">
+                                <span class="badge badge-success">Thành công</span>
+                                <div class="text-xs text-gray-500">6 giây trước</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="blockchain-box">
+                    <div class="blockchain-header">Khối Mới Nhất</div>
+                    <div class="blockchain-data">
+                        <div class="transaction-row">
+                            <div>
+                                <span class="font-bold">Khối #20150690</span>
+                                <div class="text-sm">5 giao dịch</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-xs text-gray-500">6 giây trước</div>
+                            </div>
+                        </div>
+                        <div class="transaction-row">
+                            <div>
+                                <span class="font-bold">Khối #20150689</span>
+                                <div class="text-sm">0 giao dịch</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-xs text-gray-500">12 giây trước</div>
+                            </div>
+                        </div>
+                        <div class="transaction-row">
+                            <div>
+                                <span class="font-bold">Khối #20150688</span>
+                                <div class="text-sm">4 giao dịch</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-xs text-gray-500">17 giây trước</div>
+                            </div>
+                        </div>
+                        <div class="transaction-row">
+                            <div>
+                                <span class="font-bold">Khối #20150687</span>
+                                <div class="text-sm">3 giao dịch</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-xs text-gray-500">22 giây trước</div>
+                            </div>
+                        </div>
+                        <div class="transaction-row">
+                            <div>
+                                <span class="font-bold">Khối #20150686</span>
+                                <div class="text-sm">4 giao dịch</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-xs text-gray-500">28 giây trước</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+          
+             <!-- Dán đoạn này vào nơi bạn muốn hiển thị nội dung từ BlockExplorer -->
+    <iframe src="https://blockexplorer.minepi.com/mainnet/operations" width="100%" height="600" style="border: none;"></iframe>
+                </div>
+             
+            </div>
+        </div>
+    </section>
+
+ <!-- Services Section -->
+    <section class="py-16 bg-white" id="services">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">Dịch Vụ Pi Node</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <!-- Service 1 - Selling Pi Node Computers -->
+                <div class="bg-white p-8 rounded-lg shadow-lg border border-gray-100">
+                    <div class="feature-icon mb-4">
+                        <i class="fas fa-desktop text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Bán Máy Tính Pi Node</h3>
+                    <p class="text-gray-600 mb-4">Cung cấp máy tính chuyên dụng đã được cài đặt sẵn sàng để chạy Pi Node, với nhiều cấu hình khác nhau phù hợp mọi nhu cầu.</p>
+                    
+                    <ul class="mb-6 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Máy tính đã cài đặt và cấu hình sẵn</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Hỗ trợ kỹ thuật 24/7</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Bảo hành phần cứng 12 tháng</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Miễn phí cập nhật phần mềm Pi Node</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="mt-auto">
+                        <a href="#products" class="pi-btn inline-block">Xem Sản Phẩm</a>
+                    </div>
+                </div>
+                
+                <!-- Service 2 - Pi Node Installation -->
+                <div class="bg-white p-8 rounded-lg shadow-lg border border-gray-100">
+                    <div class="feature-icon mb-4">
+                        <i class="fas fa-cogs text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Dịch Vụ Cài Đặt Pi Node</h3>
+                    <p class="text-gray-600 mb-4">Cài đặt và cấu hình Pi Node trên máy tính của bạn, đảm bảo hoạt động ổn định và hiệu quả.</p>
+                    
+                    <ul class="mb-6 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Cài đặt và cấu hình Docker</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Cài đặt Pi Node và kết nối tài khoản</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Tối ưu hóa hiệu suất</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Hướng dẫn cách sử dụng và bảo trì</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="mb-4">
+                        <p class="font-bold">Giá dịch vụ cài đặt:</p>
+                        <p>300,000 VNĐ / máy</p>
+                    </div>
+                    
+                    <div class="mt-auto">
+                        <a href="#contact" class="pi-btn inline-block">Đặt Lịch Cài Đặt</a>
+                    </div>
+                </div>
+                
+                <!-- Service 3 - Pi Node Maintenance -->
+                <div class="bg-white p-8 rounded-lg shadow-lg border border-gray-100">
+                    <div class="feature-icon mb-4">
+                        <i class="fas fa-shield-alt text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Chăm Sóc Pi Node Online</h3>
+                    <p class="text-gray-600 mb-4">Giám sát và bảo trì Pi Node từ xa, đảm bảo hoạt động liên tục và khắc phục sự cố kịp thời.</p>
+                    
+                    <ul class="mb-6 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Giám sát 24/7 trạng thái hoạt động</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Cập nhật phần mềm tự động</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Khắc phục sự cố từ xa</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Báo cáo hiệu suất hàng tháng</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="mb-4">
+                        <p class="font-bold">Giá dịch vụ:</p>
+                        <p>200,000 VNĐ / tháng</p>
+                        <p>2,000,000 VNĐ / năm (tiết kiệm 400,000 VNĐ)</p>
+                    </div>
+                    
+                    <div class="mt-auto">
+                        <a href="#contact" class="pi-btn inline-block">Đăng Ký Dịch Vụ</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Why Choose Us - Enhanced Section -->
+            <div class="why-choose-us">
+                <h3>Tại Sao Chọn Dịch Vụ Của Chúng Tôi?</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="feature-card">
+                        <div class="feature-icon-enhanced">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold mb-3 text-center">Chuyên Nghiệp</h4>
+                        <p class="text-center">Đội ngũ kỹ thuật với hơn 3 năm kinh nghiệm về Pi Network và mạng blockchain, cam kết mang lại dịch vụ chất lượng cao nhất.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon-enhanced">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold mb-3 text-center">Hỗ Trợ 24/7</h4>
+                        <p class="text-center">Luôn sẵn sàng hỗ trợ khi bạn gặp vấn đề với Pi Node của mình, bất kể ngày đêm, qua nhiều kênh liên lạc.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon-enhanced">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold mb-3 text-center">Cập Nhật Liên Tục</h4>
+                        <p class="text-center">Luôn cập nhật những thay đổi mới nhất từ Pi Network để đảm bảo Node của bạn hoạt động tối ưu với hiệu suất cao nhất.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="py-16 bg-gray-50" id="products">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">Máy Tính Pi Node</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Product 1 - Basic Model -->
+                <div class="card bg-white relative">
+                    <div class="relative">
+                        <span class="product-tag product-tag-basic">Basic</span>
+                        <img src="assets/images/pi-node-basic.jpg" alt="Pi Node Basic" class="w-full h-48 object-cover">
+                        <div class="absolute top-0 right-0 price-tag">391 Pi</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3">Pi Node Basic</h3>
+                        <table class="specs-table">
+                            <tr>
+                                <td class="font-medium">Main:</td>
+                                <td>X79G</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">CPU:</td>
+                                <td>Xeon E5 2696 V2 2.5GHz Up To 3.3GHz (12 cores, 24 threads)</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">RAM:</td>
+                                <td>64GB DDR3 bus 1600MHZ (16GBx4)</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">SSD:</td>
+                                <td>SSD 512GB</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">CARD:</td>
+                                <td>Xuất hình 1GB</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">CASE:</td>
+                                <td>Xigmatek</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">Nguồn:</td>
+                                <td>550W CST</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">TẢN NHIỆT:</td>
+                                <td>AM6300</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">BH:</td>
+                                <td>6 Tháng</td>
+                            </tr>
+                        </table>
+                        
+                        <div class="mt-6 flex space-x-2">
+                            <a href="#contact" class="pi-btn w-full text-center">Mua Ngay</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 2 - Standard Model -->
+                <div class="card bg-white relative">
+                    <div class="relative">
+                        <span class="product-tag product-tag-standard">Standard</span>
+                       
+                        <img src="assets/images/pi-node-standard.jpg" alt="Pi Node Basic" class="w-full h-48 object-cover">
+                        <div class="absolute top-0 right-0 price-tag">670 Pi</div>
+					
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3">Pi Node Standard</h3>
+                        <table class="specs-table">
+                            <tr>
+                                <td class="font-medium">Main:</td>
+                                <td>X99 XZ DU99D4</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">CPU:</td>
+                                <td>2 Chip Xeon E5 2686 V4 (36 cores, 72 threads)</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">RAM:</td>
+                                <td>64GB DDR4 bus 2133</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">SSD:</td>
+                                <td>1TB NVMe</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">CARD:</td>
+                                <td>Xuất hình 1GB</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">CASE:</td>
+                                <td>Chuyên main dual 3 led fan</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">NGUỒN:</td>
+                                <td>650w</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">TẢN NHIỆT:</td>
+                                <td>2 TẢN T400</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">BH:</td>
+                                <td>12 tháng</td>
+                            </tr>
+                        </table>
+                        
+                        <div class="mt-6 flex space-x-2">
+                            <a href="#contact" class="pi-btn w-full text-center">Mua Ngay</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 3 - Premium Model -->
+                <div class="card bg-white relative">
+                    <div class="relative">
+                        <span class="product-tag product-tag-premium">Premium</span>
+                        <img src="assets/images/pi-node-premium.jpg" alt="Pi Node Basic" class="w-full h-48 object-cover">
+                        <div class="absolute top-1 right-1 price-tag">1284 Pi</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3">Pi Node Premium</h3>
+                        <table class="specs-table">
+                            <tr>
+                                <td class="font-medium">Main:</td>
+                                <td>HUANZHI X99 F8D</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">CPU:</td>
+                                <td>2 Chip Xeon E5 2696 V4 (44 cores, 88 threads)</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">RAM:</td>
+                                <td>128GB DDR4 (4x32GB)</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">SSD:</td>
+                                <td>2TB NVMe</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">CARD:</td>
+                                <td>VGA NVIDIA GT 730 2GB DDR5</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">CASE:</td>
+                                <td>Chuyên main dual</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">NGUỒN:</td>
+                                <td>Segotep 650w</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">TẢN NHIỆT:</td>
+                                <td>Khí 6300 Plus</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">BH:</td>
+                                <td>12 tháng</td>
+                            </tr>
+                        </table>
+                        
+                        <div class="mt-6 flex space-x-2">
+                            <a href="#contact" class="pi-btn w-full text-center">Mua Ngay</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- View More Products Button -->
+            <div class="view-more-btn" id="viewMoreBtn">
+                <i class="fas fa-plus-circle mr-2"></i> Xem thêm sản phẩm
+            </div>
+            
+            <!-- Additional Products (Hidden by Default) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 additional-products" id="additionalProducts">
+                <!-- Product 4 - Advanced Model -->
+                <div class="card bg-white relative">
+                    <div class="relative">
+                        <span class="product-tag product-tag-advanced">Basic</span>
+                        <img src="assets/images/pi-node-basic.jpg" alt="Pi Node Basic" class="w-full h-48 object-cover">
+                        <div class="absolute top-1 right-1 price-tag">475 Pi</div>
+                    </div>
+                    <div class="p-6">
+                     
+                        <table class="specs-table">
+                            <tr>
+                                <td class="font-medium">Main:</td>
+                                <td>X79 DUAL</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">CPU:</td>
+                                <td>2 Chip Xeon E5 2696 V2 2.50GHz Up To 3.30GHz, 30M (12 cores, 24 threads)</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">RAM:</td>
+                                <td>64GB DDR3 bus 1600MHZ (16GBx4)</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">SSD:</td>
+                                <td>512GB</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">CARD:</td>
+                                <td>Xuất hình 1GB</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">CASE:</td>
+                                <td>Xigmatek chuyên Dual</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">Nguồn:</td>
+                                <td>650w</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">TẢN NHIỆT:</td>
+                                <td>AM6300</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">BH:</td>
+                                <td>12 Tháng</td>
+                            </tr>
+                        </table>
+                        
+                        <div class="mt-6 flex space-x-2">
+                            <a href="#contact" class="pi-btn w-full text-center">Mua Ngay</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 5 - Enterprise Model -->
+                <div class="card bg-white relative">
+                    <div class="relative">
+                        <span class="product-tag product-tag-enterprise">Basic</span>
+                        <img src="assets/images/pi-node-basic.jpg" alt="Pi Node Basic" class="w-full h-48 object-cover">
+                        <div class="absolute top-1 right-1 price-tag">475 Pi</div>
+                    </div>
+                    <div class="p-6">
+                            <table class="specs-table">
+                            <tr>
+                                <td class="font-medium">Main:</td>
+                                <td>X99H</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">CPU:</td>
+                                <td>1 Chip Xeon E5 2686 V4 2.30GHz Turbo 3.0GHz, 45MB (18 cores, 36 threads)</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">RAM:</td>
+                                <td>64GB DDR4 bus 2133MHZ</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">SSD:</td>
+                                <td>512GB</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">CARD:</td>
+                                <td>Xuất hình 1GB</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">CASE:</td>
+                                <td>Xigmatek</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">NGUỒN:</td>
+                                <td>650w CST</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">TẢN NHIỆT:</td>
+                                <td>AM6300</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">BH:</td>
+                                <td>12 tháng</td>
+                            </tr>
+                        </table>
+                        
+                        <div class="mt-6 flex space-x-2">
+                            <a href="#contact" class="pi-btn w-full text-center">Mua Ngay</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 6 - Entry Model -->
+                <div class="card bg-white relative">
+                    <div class="relative">
+                        <span class="product-tag product-tag-entry">Standard</span>
+                      <img src="assets/images/pi-node-standard.jpg" alt="Pi Node Basic" class="w-full h-48 object-cover">
+                        <div class="absolute top-1 right-1 price-tag">615 Pi</div>
+                    </div>
+                    <div class="p-6">
+                        
+                        <table class="specs-table">
+                            <tr>
+                                <td class="font-medium">Main:</td>
+                                <td>X99 Dual Xeon</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">CPU:</td>
+                                <td>2 Chip Xeon E5 2683 V4 2.5GHz turbo 3.0 (32 cores, 64 threads)</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">RAM:</td>
+                                <td>32GB DDR4 2400MHz (16gbx4)</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">SSD:</td>
+                                <td>Colorful 1TB CN600</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">CARD:</td>
+                                <td>Xuất hình 1GB</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">CASE:</td>
+                                <td>Case mặt kính + 3 led fan</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">NGUỒN:</td>
+                                <td>650w</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">TẢN NHIỆT:</td>
+                                <td>2 AM6300 Plus</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">BH:</td>
+                                <td>12 tháng</td>
+                            </tr>
+                        </table>
+                        
+                        <div class="mt-6 flex space-x-2">
+                            <a href="#contact" class="pi-btn w-full text-center">Mua Ngay</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation Guides Section -->
+    <section class="py-16 bg-gray-50" id="guides">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">Hướng Dẫn Cài Đặt Pi Node</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+               <!-- Video Guides Column -->
+<div>
+      
+    <div class="bg-white p-4 rounded-lg shadow-sm mb-6">
+        <div class="aspect-w-16 aspect-h-9 mb-4">
+            <iframe class="rounded" width="100%" height="315" src="https://www.youtube.com/embed/884xGD2IQt0" title="How to solve Pi Node blockchain issues" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <h4 class="font-bold mb-2">Hướng dẫn cài Node Pi mạng VNPT</h4>
+        <p class="text-gray-600 text-sm">Hướng dẫn cài Node Pi mạng VNPT modem IGATE GW040-H.</p>
+    </div>
+    
+    <div class="bg-white p-4 rounded-lg shadow-sm mb-6">
+        <div class="aspect-w-16 aspect-h-9 mb-4">
+            <iframe class="rounded" width="100%" height="315" src="https://www.youtube.com/embed/ES-Wfne41W4" title="Hướng dẫn cách khai báo port trong tường lửa Node Pi" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <h4 class="font-bold mb-2">Hướng dẫn cách khai báo port trong tường lửa Node Pi</h4>
+        <p class="text-gray-600 text-sm">Hướng dẫn cách khai báo port trong tường lửa Node Pi.</p>
+    </div>
+    
+    <div class="bg-white p-4 rounded-lg shadow-sm">
+        <div class="aspect-w-16 aspect-h-9 mb-4">
+            <iframe class="rounded" width="100%" height="315" src="https://www.youtube.com/embed/Nbn2d7fo_-U" title="PChạy Pi Node để nhân đôi Pi thưởng chỉ với 7.2triệu" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <h4 class="font-bold mb-2">Chạy Pi Node để nhân đôi Pi thưởng chỉ với 7.2triệu</h4>
+        <p class="text-gray-600 text-sm">hạy Pi Node để nhân đôi Pi thưởng chỉ với 7.2triệu</p>
+    </div>
+</div>
+                
+                <!-- Step by Step Guides Column -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Hướng Dẫn Từng Bước</h3>
+                    
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h4 class="font-bold mb-2">Cài Đặt Docker Desktop</h4>
+                        <p class="text-gray-600 mb-3">Docker là nền tảng cần thiết để chạy Pi Node. Tải Docker Desktop từ website chính thức.</p>
+                      
+                        <a href="https://www.docker.com/products/docker-desktop/" target="_blank" class="text-purple-700 hover:underline">Tải Docker Desktop</a>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h4 class="font-bold mb-2">Tải và Cài Đặt Pi Node</h4>
+                        <p class="text-gray-600 mb-3">Tải ứng dụng Pi Node từ trang chính thức của Pi Network.</p>
+                        
+                        <a href="https://minepi.com/pi-node/" target="_blank" class="text-purple-700 hover:underline">Tải Pi Node</a>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h4 class="font-bold mb-2">Đăng Nhập và Kết Nối Tài Khoản</h4>
+                        <p class="text-gray-600 mb-3">Đăng nhập vào Pi Node bằng tài khoản Pi Network và thực hiện xác thực.</p>
+                       
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <h4 class="font-bold mb-2">Cấu Hình và Khởi Chạy Node</h4>
+                        <p class="text-gray-600 mb-3">Hoàn tất cấu hình và bắt đầu chạy Pi Node của bạn.</p>
+                       
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">5</div>
+                        <h4 class="font-bold mb-2">Kiểm Tra Trạng Thái và Bảo Trì</h4>
+                        <p class="text-gray-600 mb-3">Hướng dẫn kiểm tra trạng thái và bảo trì Pi Node định kỳ.</p>
+                       <!-- <img src="https://cdn.jsdelivr.net/gh/storybookjs/brand@main/placeholder-image.png" alt="Pi Node Maintenance" class="w-full rounded-lg mb-2"> -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Enhanced Support Button -->
+            <div class="support-btn-container">
+                <a href="#contact" class="support-btn">
+                    <i class="fas fa-headset"></i> Nhận Hỗ Trợ Kỹ Thuật
+                </a>
+                <p class="support-message"> Nếu bạn gặp khó khăn trong quá trình cài đặt hoặc vận hành node hãy liên hệ, chúng tôi hỗ trợ 24/24! </p>
+		</div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="py-16 bg-white" id="news">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">Tin Tức Pi Network</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- News Item 1 -->
+                <div class="news-card">
+                    <img src="assets/images/open.jpg" alt="Pi Open Network" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <span class="news-date mb-2 inline-block">19 Tháng 2, 2025</span>
+                        <h3 class="text-xl font-bold mb-2">Pi's Open Network Đã Ra Mắt!</h3>
+                        <p class="text-gray-600 mb-4">Pi Network chính thức ra mắt Open Network, đánh dấu bước chuyển từ hệ sinh thái đóng sang phi tập trung hoàn toàn.</p>
+                        <a href="https://minepi.com/blog/open-network/" target="_blank" class="text-purple-700 hover:underline font-medium">Đọc thêm <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <!-- News Item 2 -->
+                <div class="news-card">
+                    <img src="assets/images/piad.jpg" alt="Pi Open Network" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <span class="news-date mb-2 inline-block">14 Tháng 3, 2025</span>
+                        <h3 class="text-xl font-bold mb-2">Mở rộng mạng lưới quảng cáo Pi!</h3>
+                        <p class="text-gray-600 mb-4"> Hiện mở cho tất cả các ứng dụng Pi được liệt kê trong hệ sinh thái</p>
+                        <a href="https://minepi.com/blog/ad-network-expansion/" class="text-purple-700 hover:underline font-medium">Đọc thêm <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <!-- News Item 3 -->
+                <div class="news-card">
+                    <img src="assets/images/pifest.jpg" alt="Pi Open Network" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <span class="news-date mb-2 inline-block">5 Tháng 3, 2025</span>
+                        <h3 class="text-xl font-bold mb-2">Tóm tắt PiFest</h3>
+                        <p class="text-gray-600 mb-4">Thúc đẩy tiện ích thương mại địa phương trong mạng lưới mở.</p>
+                        <a href="https://minepi.com/blog/open-network-pifest-recap/" class="text-purple-700 hover:underline font-medium">Đọc thêm <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pi Core Team Updates -->
+            <div class="mt-12">
+                <h3 class="text-xl font-bold mb-6">Cập Nhật Từ Pi Core Team</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mr-4">
+                                <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-bullhorn text-purple-700"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-2">Ứng Dụng Mainnet Mới</h4>
+                                <p class="text-gray-600 text-sm mb-2">Cập nhật này lần đầu tiên cung cấp quyền truy cập dễ dàng hơn cho Pioneers đến các ứng dụng Pi Mainnet, nơi Pi thực trên Mainnet có thể được giao dịch cho hàng hóa thực.</p>
+                                <span class="text-xs text-gray-500">27 Tháng 12, 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mr-4">
+                                <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-chart-line text-purple-700"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-2">Danh Sách Các Doanh Nghiệp Đã Xác Minh KYB</h4>
+                                <p class="text-gray-600 text-sm mb-2">Chỉ các doanh nghiệp được xác minh KYB mới đủ điều kiện tạo các ví Pi Mainnet phi giám sát riêng lẻ cho phép họ thực hiện giao dịch với đồng Pi thực.</p>
+                                <span class="text-xs text-gray-500">20 Tháng 2, 2025</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mr-4">
+                                <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-calendar-alt text-purple-700"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-2">Ngày Ra Mắt Open Network</h4>
+                                <p class="text-gray-600 text-sm mb-2">Pi Network tiếp tục thực hiện mục tiêu trở thành mạng lưới tiền điện tử phi tập trung với nhiều tiện ích nhất và có giá trị nhất trên thế giới với việc ra mắt Open Network.</p>
+                                <span class="text-xs text-gray-500">15 Tháng 2, 2025</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mr-4">
+                                <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-code-branch text-purple-700"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-2">Cập Nhật Pi Node v0.4.5</h4>
+                                <p class="text-gray-600 text-sm mb-2">Phiên bản mới của Pi Node đã được phát hành với cải tiến hiệu suất, sửa lỗi và tính năng bảo mật nâng cao.</p>
+                                <span class="text-xs text-gray-500">10 Tháng 1, 2025</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-16 bg-gray-50" id="contact">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">Liên Hệ</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Contact Form -->
+                <div>
+                    <div class="bg-white p-8 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-bold mb-6">Gửi Yêu Cầu</h3>
+                        
+                        <form>
+                            <div class="mb-4">
+                                <label for="name" class="block text-gray-700 mb-2">Họ và Tên</label>
+                                <input type="text" id="name" class="input-field" placeholder="Nguyễn Văn A">
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="email" class="block text-gray-700 mb-2">Email</label>
+                                <input type="email" id="email" class="input-field" placeholder="example@gmail.com">
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="phone" class="block text-gray-700 mb-2">Số Điện Thoại</label>
+                                <input type="tel" id="phone" class="input-field" placeholder="0912345678">
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="service" class="block text-gray-700 mb-2">Dịch Vụ Quan Tâm</label>
+                                <select id="service" class="input-field">
+                                    <option value="">-- Chọn Dịch Vụ --</option>
+                                    <option value="buy">Mua Máy Pi Node</option>
+                                    <option value="install">Dịch Vụ Cài Đặt Pi Node</option>
+                                    <option value="maintenance">Dịch Vụ Chăm Sóc Pi Node</option>
+                                    <option value="support">Hỗ Trợ Kỹ Thuật</option>
+                                    <option value="other">Khác</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="message" class="block text-gray-700 mb-2">Nội Dung Yêu Cầu</label>
+                                <textarea id="message" class="input-field" rows="4" placeholder="Vui lòng mô tả chi tiết yêu cầu của bạn..."></textarea>
+                            </div>
+                            
+                            <button type="submit" class="pi-btn w-full">Gửi Yêu Cầu</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Contact Information -->
+                <div>
+                    <div class="bg-white p-8 rounded-lg shadow-sm mb-8">
+                        <h3 class="text-xl font-bold mb-6">Thông Tin Liên Hệ</h3>
+                        
+                        <div class="contact-info-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Địa Chỉ</h4>
+                                <p class="text-gray-600"> Nguyễn Ảnh Thủ, Quận Hóc Môn, TP. Hồ Chí Minh</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Điện Thoại</h4>
+                                <p class="text-gray-600">+84 909 399 223</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Email</h4>
+                                <p class="text-gray-600"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="492a26273d282a3d092d202c2427262d2c3920672a2624">[email&#160;protected]</a></p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Giờ Làm Việc</h4>
+                                <p class="text-gray-600">Thứ 2 - CN: 8:00 - 22:00</p>
+                                                       </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-8 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-bold mb-4">Theo Dõi Chúng Tôi</h3>
+                        
+                        <div class="flex mb-6">
+                            <a href="https://www.facebook.com/share/1PwQXCTKYX/?mibextid=wwXIfr" class="social-icon">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="https://x.com/diemhuynhcoin?s=21&t=AV6mowe7Fc9eGe2fJKZ-Yw" class="social-icon">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://www.youtube.com/@diempinetwork" class="social-icon">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                            <a href="https://t.me/diem_pinetwork" class="social-icon">
+                                <i class="fab fa-telegram"></i>
+                            </a>
+                            <a href="https://zalo.me/diem_huynh" target="_blank" class="social-icon">
+                                <img src="assets/images/zalo.jpg" alt="Zalo" width="24" height="24">
+                            </a>
+                        </div>
+                        
+                        <h4 class="font-semibold mb-2">Đăng Ký Nhận Tin Tức</h4>
+                        <p class="text-gray-600 text-sm mb-4">Nhận thông tin cập nhật mới nhất về Pi Network và dịch vụ của chúng tôi.</p>
+                        
+                        <div class="flex">
+                            <input type="email" placeholder="Email của bạn" class="input-field rounded-r-none flex-grow">
+                            <button class="pi-btn rounded-l-none">Đăng Ký</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">Khách Hàng Nói Gì Về Chúng Tôi</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="testimonial-card">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gray-200 rounded-full overflow-hidden mr-4">
+                            <img src= "assets/images/hoang.jpg" alt="Avatar" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Nguyễn Hoàng</h4>
+                            <p class="text-gray-500 text-sm">Pi Pioneer từ 2019</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"Dịch vụ cài đặt Pi Node rất chuyên nghiệp. Tôi gặp nhiều khó khăn khi tự cài đặt nhưng đội ngũ kỹ thuật đã giúp tôi giải quyết mọi vấn đề. Node của tôi đã hoạt động ổn định được hơn 6 tháng."</p>
+                </div>       
+                <div class="testimonial-card">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gray-200 rounded-full overflow-hidden mr-4">
+                           <img src= "assets/images/van.jpg" alt="Avatar" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Trần Thị Vân</h4>
+                            <p class="text-gray-500 text-sm">Pi Pioneer</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"Tôi đã mua máy Pi Node Standard và rất hài lòng với hiệu suất của nó. Máy chạy 24/7 mà không gặp vấn đề gì. Dịch vụ hỗ trợ sau bán hàng cũng rất tốt, luôn sẵn sàng giúp đỡ khi tôi cần."</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gray-200 rounded-full overflow-hidden mr-4">
+                            <img src= "assets/images/sy.jpg" alt="Avatar" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Lê Văn Sỹ</h4>
+                            <p class="text-gray-500 text-sm">Chủ cửa hàng chấp nhận Pi</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"Dịch vụ chăm sóc Pi Node online giúp tôi tiết kiệm rất nhiều thời gian. Tôi không phải lo lắng về việc bảo trì hay cập nhật node, mọi thứ đều được xử lý tự động. Rất đáng tiền!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-gray-50">
+	
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">Câu Hỏi Thường Gặp</h2>
+            
+            <div class="max-w-3xl mx-auto">
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-4">
+                    <h3 class="font-bold mb-2">Pi Node là gì?</h3>
+                    <p class="text-gray-600">Pi Node là phần mềm chạy trên máy tính để tham gia vào mạng lưới Pi Network, giúp xác thực giao dịch và duy trì bảo mật cho blockchain. Không giống như các node sử dụng proof of work như Bitcoin hoặc Ethereum, Pi Node sử dụng thuật toán đồng thuận khác dựa trên Stellar Consensus Protocol (SCP).</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-4">
+                    <h3 class="font-bold mb-2">Pi Node có tốn nhiều điện không?</h3>
+                    <p class="text-gray-600">Pi Node tiêu thụ ít điện năng hơn so với các node đào tiền điện tử truyền thống sử dụng proof of work. Một máy tính chạy Pi Node thường chỉ tiêu thụ khoảng 50-100W, tương đương với một bóng đèn thông thường.</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-4">
+                    <h3 class="font-bold mb-2">Tôi có cần máy tính mạnh để chạy Pi Node không?</h3>
+                    <p class="text-gray-600">Bạn không cần máy tính quá mạnh để chạy Pi Node. Một máy tính với CPU 4 nhân, RAM 8GB và ổ cứng SSD 256GB là đủ để chạy Pi Node ổn định. Tuy nhiên, nếu muốn chạy nhiều node hoặc đảm bảo hiệu suất tốt hơn, bạn có thể cân nhắc máy tính với cấu hình cao hơn.</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-4">
+                    <h3 class="font-bold mb-2">Tôi có thể đào Pi thông qua Pi Node không?</h3>
+                    <p class="text-gray-600">Pi Node không đào Pi như cách đào Bitcoin truyền thống. Tuy nhiên, việc chạy Pi Node có thể tăng tốc độ đào Pi trên điện thoại của bạn. Các node pioneer cũng có thể nhận được phần thưởng từ mạng lưới Pi Network trong tương lai.</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-4">
+                    <h3 class="font-bold mb-2">Dịch vụ chăm sóc Pi Node bao gồm những gì?</h3>
+                    <p class="text-gray-600">Dịch vụ chăm sóc Pi Node của chúng tôi bao gồm giám sát 24/7, cập nhật phần mềm tự động, khắc phục sự cố từ xa, dọn dẹp dữ liệu blockchain khi cần thiết, và báo cáo hiệu suất hàng tháng. Chúng tôi đảm bảo Pi Node của bạn luôn hoạt động ổn định và hiệu quả.</p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Diễm Pi Node</h3>
+                    <p class="text-gray-400 mb-4">Cung cấp giải pháp Pi Node toàn diện: từ máy tính chuyên dụng, dịch vụ cài đặt đến chăm sóc node chuyên nghiệp.</p>
+                    <div class="flex space-x-2">
+                        <a href="#" class="social-icon bg-gray-700">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-gray-700">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-gray-700">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-gray-700">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Dịch Vụ</h3>
+                    <a href="#products" class="footer-link">Máy Tính Pi Node</a>
+                    <a href="#services" class="footer-link">Dịch Vụ Cài Đặt</a>
+                    <a href="#services" class="footer-link">Chăm Sóc Node Online</a>
+                    <a href="#guides" class="footer-link">Hướng Dẫn Cài Đặt</a>
+                    <a href="#" class="footer-link">Hỗ Trợ Kỹ Thuật</a>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Liên Kết</h3>
+                    <a href="#" class="footer-link">Trang Chủ</a>
+                    <a href="#blockchain" class="footer-link">Blockchain</a>
+                    <a href="#news" class="footer-link">Tin Tức</a>
+                    <a href="#" class="footer-link">Về Chúng Tôi</a>
+                    <a href="#contact" class="footer-link">Liên Hệ</a>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Liên Hệ</h3>
+                    <p class="footer-link flex items-start">
+                        <i class="fas fa-map-marker-alt mt-1 mr-2"></i>
+                        <span>Nguyễn Ảnh Thủ, Quận Hóc Môn, TP. Hồ Chí Minh</span>
+                    </p>
+                    <p class="footer-link flex items-start">
+                        <i class="fas fa-phone-alt mt-1 mr-2"></i>
+                        <span>+84 909 399 223</span>
+                    </p>
+                    <p class="footer-link flex items-start">
+                        <i class="fas fa-envelope mt-1 mr-2"></i>
+                        <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="680b07061c090b1c280c010d0506070c0d1801460b0705">[email&#160;protected]</a></span>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">&copy; 2025 Pi Node Services. Tất cả quyền được bảo lưu.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white text-sm">Điều Khoản Sử Dụng</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm">Chính Sách Bảo Mật</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm">Chính Sách Cookie</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('active');
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.getElementById('mobile-menu').classList.remove('active');
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Form submission (simulated)
+        const form = document.querySelector('form');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Yêu cầu của bạn đã được gửi đi! Chúng tôi sẽ liên hệ lại trong thời gian sớm nhất.');
+                form.reset();
+            });
+        }
+        
+        // View More Products functionality
+        const viewMoreBtn = document.getElementById('viewMoreBtn');
+        const additionalProducts = document.getElementById('additionalProducts');
+        
+        viewMoreBtn.addEventListener('click', function() {
+            if (additionalProducts.style.display === 'none' || additionalProducts.style.display === '') {
+                additionalProducts.style.display = 'grid';
+                viewMoreBtn.innerHTML = '<i class="fas fa-minus-circle mr-2"></i> Thu gọn';
+            } else {
+                additionalProducts.style.display = 'none';
+                viewMoreBtn.innerHTML = '<i class="fas fa-plus-circle mr-2"></i> Xem thêm sản phẩm';
+                
+                // Scroll back to the products section
+                const productsSection = document.getElementById('products');
+                window.scrollTo({
+                    top: productsSection.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        });
+// API Base URL - đảm bảo đúng với cổng proxy server
+const API_BASE_URL = 'http://localhost:3000/api';
+
+// Hàm helper để gọi API với xử lý lỗi tốt hơn
+async function fetchData(endpoint) {
+    console.log(`Đang gọi API: ${API_BASE_URL}${endpoint}`);
+    try {
+        const response = await fetch(`${API_BASE_URL}${endpoint}`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}, URL: ${API_BASE_URL}${endpoint}`);
+        }
+        const data = await response.json();
+        console.log(`Nhận được dữ liệu từ ${endpoint}:`, data);
+        return data;
+    } catch (error) {
+        console.error(`Lỗi khi gọi API ${endpoint}:`, error);
+        // Hiển thị thông báo lỗi cho người dùng
+        document.getElementById('error-message').textContent = 
+            `Lỗi khi tải dữ liệu: ${error.message}. Vui lòng thử lại sau.`;
+        document.getElementById('error-message').style.display = 'block';
+        return null;
+    }
+}
+
+// Hàm để định dạng số Pi
+function formatPi(amount) {
+    if (!amount) return "0 π";
+    return parseFloat(amount).toLocaleString('vi-VN', { 
+        minimumFractionDigits: 3,
+        maximumFractionDigits: 3 
+    }) + ' π';
+}
+
+// Hàm để rút gọn địa chỉ ví
+function shortenAddress(address) {
+    if (!address) return "";
+    return address.substring(0, 4) + '...' + address.substring(address.length - 4);
+}
+
+// Hàm để tính thời gian tương đối
+function timeAgo(timestamp) {
+    if (!timestamp) return "không xác định";
+    
+    const seconds = Math.floor((new Date() - new Date(timestamp)) / 1000);
+    
+    let interval = seconds / 31536000;
+    if (interval > 1) return Math.floor(interval) + " năm trước";
+    
+    interval = seconds / 2592000;
+    if (interval > 1) return Math.floor(interval) + " tháng trước";
+    
+    interval = seconds / 86400;
+    if (interval > 1) return Math.floor(interval) + " ngày trước";
+    
+    interval = seconds / 3600;
+    if (interval > 1) return Math.floor(interval) + " giờ trước";
+    
+    interval = seconds / 60;
+    if (interval > 1) return Math.floor(interval) + " phút trước";
+    
+    return Math.floor(seconds) + " giây trước";
+}
+
+// Cập nhật thông tin mạng lưới
+async function updateNetworkInfo() {
+    const status = await fetchData('/status');
+    if (status) {
+        // Cập nhật UI với dữ liệu
+        document.getElementById('migrated-rewards').textContent = formatPi(status.migration_rewards);
+        document.getElementById('locked-rewards').textContent = formatPi(status.locked_rewards);
+        document.getElementById('unlocked-rewards').textContent = formatPi(status.unlocked_rewards);
+        document.getElementById('circulating-supply').textContent = formatPi(status.circulating_supply);
+        document.getElementById('total-supply').textContent = formatPi(status.total_supply);
+    }
+}
+
+// Cập nhật giao dịch mới nhất
+async function updateLatestTransactions() {
+    const transactions = await fetchData('/transactions/latest');
+    if (transactions && transactions.length > 0) {
+        const transactionsContainer = document.getElementById('latest-transactions');
+        transactionsContainer.innerHTML = '';
+        
+        transactions.slice(0, 5).forEach(tx => {
+            const txElement = document.createElement('div');
+            txElement.className = 'transaction-item';
+            txElement.innerHTML = `
+                <h4>${shortenAddress(tx.source_account)}</h4>
+                <p>Chuyển ${formatPi(tx.amount || '0')}</p>
+                <p class="status ${tx.successful ? 'success' : 'failed'}">${tx.successful ? 'Thành công' : 'Thất bại'}</p>
+                <p class="time">${timeAgo(tx.created_at)}</p>
+            `;
+            transactionsContainer.appendChild(txElement);
+        });
+    }
+}
+
+// Cập nhật khối mới nhất
+async function updateLatestBlocks() {
+    const blocks = await fetchData('/blocks/latest');
+    if (blocks && blocks.length > 0) {
+        const blocksContainer = document.getElementById('latest-blocks');
+        blocksContainer.innerHTML = '';
+        
+        blocks.forEach(block => {
+            const blockElement = document.createElement('div');
+            blockElement.className = 'block-item';
+            blockElement.innerHTML = `
+                <h4>Khối #${block.sequence}</h4>
+                <p>${block.operation_count} giao dịch</p>
+            `;
+            blocksContainer.appendChild(blockElement);
+        });
+    }
+}
+
+// Gọi các hàm cập nhật khi trang tải xong
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('Trang đã tải xong, bắt đầu gọi API...');
+    
+    // Thêm phần tử hiển thị lỗi nếu chưa có
+    if (!document.getElementById('error-message')) {
+        const errorElement = document.createElement('div');
+        errorElement.id = 'error-message';
+        errorElement.style.display = 'none';
+        errorElement.style.color = 'red';
+        errorElement.style.padding = '10px';
+        errorElement.style.margin = '10px 0';
+        errorElement.style.backgroundColor = '#ffeeee';
+        errorElement.style.border = '1px solid #ffaaaa';
+        errorElement.style.borderRadius = '5px';
+        document.querySelector('#blockchain-data').prepend(errorElement);
+    }
+    
+    updateNetworkInfo();
+    updateLatestTransactions();
+    updateLatestBlocks();
+    
+    // Cập nhật dữ liệu mỗi 60 giây
+    setInterval(() => {
+        updateNetworkInfo();
+        updateLatestTransactions();
+        updateLatestBlocks();
+    }, 60000);
+});
+    </script>
+</body>
+</html>
